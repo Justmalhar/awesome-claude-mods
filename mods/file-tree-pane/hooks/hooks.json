@@ -1,0 +1,4 @@
+{
+  "description": "File Tree Pane: a /tree command that opens a file tree pane coloured by git status.",
+  "modules": ["./file-tree-pane.mjs"]
+}

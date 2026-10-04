@@ -1,0 +1,7 @@
+{
+  "name": "file-tree-pane",
+  "version": "0.1.0",
+  "description": "Adds /tree: a side pane with a lazy file tree coloured by git status. Press a file to put @path in the prompt.",
+  "author": { "name": "Malhar Ujawane" },
+  "keywords": ["mods", "pane", "files", "git"]
+}
