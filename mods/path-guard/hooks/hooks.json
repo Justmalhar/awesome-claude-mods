@@ -1,0 +1,4 @@
+{
+  "description": "Path Guard: a tool.call hook that refuses Write, Edit and MultiEdit calls outside the project root or inside .git.",
+  "modules": ["./path-guard.mjs"]
+}

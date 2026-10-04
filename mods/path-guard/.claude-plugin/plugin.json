@@ -1,0 +1,27 @@
+{
+  "name": "path-guard",
+  "version": "0.1.0",
+  "description": "Blocks Write, Edit and MultiEdit calls that target a path outside the project root or inside .git, plus optional deny globs.",
+  "author": { "name": "Malhar Ujawane" },
+  "keywords": ["mods", "safety", "paths"],
+  "userConfig": {
+    "deny_globs": {
+      "type": "string",
+      "title": "Denied globs",
+      "description": "Comma-separated globs Claude may not write, e.g. **/*.lock,infra/**. Matched against the path relative to the project root.",
+      "default": ""
+    },
+    "allow_outside": {
+      "type": "string",
+      "title": "Allowed outside the project",
+      "description": "Comma-separated absolute directories Claude may write outside the project root, e.g. /tmp. ~ is expanded.",
+      "default": ""
+    },
+    "guard_reads": {
+      "type": "boolean",
+      "title": "Guard Read too",
+      "description": "Also apply the outside-the-project and deny-glob rules to Read.",
+      "default": false
+    }
+  }
+}
