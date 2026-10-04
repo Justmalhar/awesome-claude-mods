@@ -15,10 +15,10 @@ Every mod here is a single readable file with no dependencies and no build step.
 
 ## Contents
 
-- [What is a mod?](#what-is-a-mod)
-- [Quick start](#quick-start)
-- [The mods](#the-mods)
+- [Available Mods](#available-mods)
   - [Guards](#guards) · [Status and prompt](#status-and-prompt) · [Panes](#panes) · [Workflow](#workflow)
+- [Quick start](#quick-start)
+- [What is a mod?](#what-is-a-mod)
 - [Bundles](#bundles)
 - [Configure a mod](#configure-a-mod)
 - [Trust and safety](#trust-and-safety)
@@ -26,16 +26,36 @@ Every mod here is a single readable file with no dependencies and no build step.
 - [Contributing](#contributing)
 - [Resources](#resources)
 
-## What is a mod?
+## Available Mods
 
-A mod is a Claude Code plugin whose JavaScript handlers run **inside** Claude Code. A handler is called when something happens (a tool call, a submitted prompt, the spinner being drawn). It can observe the event, change it, or take it over. That lets a mod do what settings hooks, skills and MCP servers can't:
+Install any of these with the [quick start](#quick-start) below. Names say what a mod does. A `*-guard` blocks or asks, a `*-bar` draws above the prompt, and a `*-pane` opens a side pane. Each link goes to the mod's own README, which lists its limits and the exact hooks and calls it makes.
 
-- **Block or rewrite a tool call** before it runs, with a reason Claude can act on
-- **Draw** a pane, a band above the prompt, or restyle the spinner
-- **Add `/commands`** that run instantly, even while Claude is working
-- **Keep state** across events, so one handler records and another shows it
+### Guards
 
-Mods need Claude Code **2.1.287 or later**. Drawing works in the terminal and the Desktop Code tab. In the VS Code extension and `claude -p`, handlers still run but nothing is drawn.
+Each runs on `tool.call` and refuses with a message that tells Claude what to do instead. They fail closed: if a guard itself errors, the call is denied rather than let through.
+
+- [`secret-guard`](mods/secret-guard/) - Blocks Write, Edit and Bash calls that would put an API key, token or private key into a file or command. The denial never repeats the secret.
+- [`sensitive-file-guard`](mods/sensitive-file-guard/) - Blocks Read, Write, Edit, Grep, Glob and Bash calls that touch `.env` files, private keys, and credential stores such as `~/.ssh` and `~/.aws`.
+- [`path-guard`](mods/path-guard/) - Keeps file edits inside the project root and out of `.git`. Optional deny globs and an allow-outside list.
+- [`branch-guard`](mods/branch-guard/) - Asks before Claude edits files or runs mutating git on `main` or `master`, and points it at a `git worktree` instead.
+- [`test-guard`](mods/test-guard/) - Stops Claude from making tests pass by weakening them: new `.skip`/`.only`, fewer assertions, gutted or deleted test files.
+
+### Status and prompt
+
+Bands compose: each mod puts the previous one's drawing inside its own, so these stack instead of fighting over the space.
+
+- [`powerline-bar`](mods/powerline-bar/) - One row above the prompt with directory, git branch and state (staged, unstaged, untracked, ahead/behind), model, and context fill. Drops segments from the right in a narrow terminal.
+- [`cost-bar`](mods/cost-bar/) - Session cost, 5-hour and 7-day plan limits, and an optional budget bar that turns yellow and red as you spend.
+- [`spinner-stats`](mods/spinner-stats/) - Adds elapsed time, the running tool, and the tool-call count to Claude Code's own spinner without replacing it.
+
+### Panes
+
+- [`file-tree-pane`](mods/file-tree-pane/) - `/tree` opens a lazy file tree coloured by git status. Press a file to put `@path` in your prompt. Filter box included.
+
+### Workflow
+
+- [`auto-checkpoint`](mods/auto-checkpoint/) - Snapshots your working tree into hidden git refs at the start of every turn, without touching your index, stash or branches. `/checkpoints` lists them and `/undo-turn` rolls back, after asking.
+- [`notify-on-finish`](mods/notify-on-finish/) - Desktop notification when a long turn ends, so you can look away. macOS, with a Linux fallback.
 
 ## Quick start
 
@@ -64,36 +84,16 @@ Install everything:
 for m in $(ls mods); do claude plugin install "$m@awesome-claude-mods" --scope user; done
 ```
 
-## The mods
+## What is a mod?
 
-Names say what a mod does. A `*-guard` blocks or asks, a `*-bar` draws above the prompt, and a `*-pane` opens a side pane. Each link goes to the mod's own README, which lists its limits and the exact hooks and calls it makes.
+A mod is a Claude Code plugin whose JavaScript handlers run **inside** Claude Code. A handler is called when something happens (a tool call, a submitted prompt, the spinner being drawn). It can observe the event, change it, or take it over. That lets a mod do what settings hooks, skills and MCP servers can't:
 
-### Guards
+- **Block or rewrite a tool call** before it runs, with a reason Claude can act on
+- **Draw** a pane, a band above the prompt, or restyle the spinner
+- **Add `/commands`** that run instantly, even while Claude is working
+- **Keep state** across events, so one handler records and another shows it
 
-Each runs on `tool.call` and refuses with a message that tells Claude what to do instead. They fail closed: if a guard itself errors, the call is denied rather than let through.
-
-- [`secret-guard`](mods/secret-guard/) - Blocks Write, Edit and Bash calls that would put an API key, token or private key into a file or command. The denial never repeats the secret.
-- [`sensitive-file-guard`](mods/sensitive-file-guard/) - Blocks Read, Write, Edit, Grep, Glob and Bash calls that touch `.env` files, private keys, and credential stores such as `~/.ssh` and `~/.aws`.
-- [`path-guard`](mods/path-guard/) - Keeps file edits inside the project root and out of `.git`. Optional deny globs and an allow-outside list.
-- [`branch-guard`](mods/branch-guard/) - Asks before Claude edits files or runs mutating git on `main` or `master`, and points it at a `git worktree` instead.
-- [`test-guard`](mods/test-guard/) - Stops Claude from making tests pass by weakening them: new `.skip`/`.only`, fewer assertions, gutted or deleted test files.
-
-### Status and prompt
-
-Bands compose: each mod puts the previous one's drawing inside its own, so these stack instead of fighting over the space.
-
-- [`powerline-bar`](mods/powerline-bar/) - One row above the prompt with directory, git branch and state (staged, unstaged, untracked, ahead/behind), model, and context fill. Drops segments from the right in a narrow terminal.
-- [`cost-bar`](mods/cost-bar/) - Session cost, 5-hour and 7-day plan limits, and an optional budget bar that turns yellow and red as you spend.
-- [`spinner-stats`](mods/spinner-stats/) - Adds elapsed time, the running tool, and the tool-call count to Claude Code's own spinner without replacing it.
-
-### Panes
-
-- [`file-tree-pane`](mods/file-tree-pane/) - `/tree` opens a lazy file tree coloured by git status. Press a file to put `@path` in your prompt. Filter box included.
-
-### Workflow
-
-- [`auto-checkpoint`](mods/auto-checkpoint/) - Snapshots your working tree into hidden git refs at the start of every turn, without touching your index, stash or branches. `/checkpoints` lists them and `/undo-turn` rolls back, after asking.
-- [`notify-on-finish`](mods/notify-on-finish/) - Desktop notification when a long turn ends, so you can look away. macOS, with a Linux fallback.
+Mods need Claude Code **2.1.287 or later**. Drawing works in the terminal and the Desktop Code tab. In the VS Code extension and `claude -p`, handlers still run but nothing is drawn.
 
 ## Bundles
 
