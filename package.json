@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node --test \"mods/*/test/*.test.mjs\"",
+    "test": "for d in mods/*/; do claude plugin test \"$d\" || exit 1; done",
     "validate": "scripts/validate.sh"
   }
 }

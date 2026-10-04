@@ -6,7 +6,7 @@ A curated collection of [Claude Code mods](https://code.claude.com/docs/en/plugi
 
 | Mod | What it does | Hooks | Calls | Draws in |
 |---|---|---|---|---|
-| [`secret-sentinel`](mods/secret-sentinel/) | Blocks Write, Edit and Bash calls that contain an API key, token or private key. | `tool.call` | `$.ui.toast` | Nothing (toast only) |
+| [`secret-guard`](mods/secret-guard/) | Blocks Write, Edit and Bash calls that contain an API key, token or private key. | `tool.call` | `$.ui.toast` | Nothing (toast only) |
 
 Requires Claude Code 2.1.287 or later.
 
@@ -14,20 +14,20 @@ Requires Claude Code 2.1.287 or later.
 
 ```bash
 claude plugin marketplace add justmalhar/awesome-claude-mods
-claude plugin install secret-sentinel@awesome-claude-mods --scope user
+claude plugin install secret-guard@awesome-claude-mods --scope user
 # or try one for a single session
 git clone https://github.com/justmalhar/awesome-claude-mods && cd awesome-claude-mods
-claude --plugin-dir ./mods/secret-sentinel
+claude --plugin-dir ./mods/secret-guard
 ```
 
 After installing while a session is open, run `/reload-plugins`.
 
 ## Contributing
 
-1. Copy the layout of `mods/secret-sentinel/` and the README from [`_template/`](_template/README.md).
+1. Copy the layout of `mods/secret-guard/` and the README from [`_template/`](_template/README.md).
 2. One file of code in `hooks/`, no dependencies, no build step.
-3. Add tests in `test/` using [`lib/mock-host.mjs`](lib/mock-host.mjs).
-4. `npm test && npm run validate` must pass. CI also fails if the README's `hooks:`/`calls:` lines differ from the validator's.
+3. Add `test/<name>.test.ts` with the official kit (`claude-code/testing`). See [docs/API-NOTES.md](docs/API-NOTES.md).
+4. `npm test && npm run validate` must pass (`claude plugin test` + `claude plugin validate`). CI also fails if the README's `hooks:`/`calls:` lines differ from the validator's.
 5. Add the mod to `.claude-plugin/marketplace.json` and the table above.
 
 Never put a real-looking token in a fixture. Build it at runtime, as the tests do, or GitHub push protection will reject the push.

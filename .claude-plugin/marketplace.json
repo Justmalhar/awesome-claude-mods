@@ -4,8 +4,8 @@
   "metadata": { "description": "A curated collection of Claude Code mods. Shared as-is." },
   "plugins": [
     {
-      "name": "secret-sentinel",
-      "source": "./mods/secret-sentinel",
+      "name": "secret-guard",
+      "source": "./mods/secret-guard",
       "description": "Blocks Write, Edit and Bash calls that would put an API key, token or private key into a file or command."
     }
   ]

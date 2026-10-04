@@ -1,0 +1,4 @@
+{
+  "description": "Secret Guard: a tool.call hook that refuses Write, Edit, MultiEdit and Bash calls containing a secret.",
+  "modules": ["./secret-guard.mjs"]
+}

@@ -25,18 +25,18 @@ Claude Code ── event ──► handler($, e, next) ──► next(e) | rewri
 | `.claude-plugin/plugin.json` | name, version, description, author |
 | `hooks/hooks.json` | `{ description, modules: ["./x.mjs"] }` |
 | `hooks/x.mjs` | `export function register(on)`; the only code |
-| `test/x.test.mjs` | `node:test` against `lib/mock-host.mjs` |
+| `test/x.test.ts` | official `claude-code/testing` kit, run by `claude plugin test` |
 | `README.md` | from `_template/`, with the validator's `hooks:`/`calls:` lines |
 | `.gitignore` | `.claude-plugin/types/` |
 
-### secret-sentinel
-`tool.call` → skip unless `e.tool` ∈ {Write, Edit, MultiEdit, Bash} and the file isn't `*.example|sample|template` → `textOf(e)` joins command/content/new_string/edits → `scan` per line (skip lines with `secret-sentinel:allow`) → `matchLine`: provider regexes first, then a generic `key = "value"` rule gated by Shannon entropy ≥ 3.5 and a placeholder filter → `{ deny }` with kind, line, redacted prefix. All regexes are linear-time.
+### secret-guard
+`tool.call` → skip unless `e.tool` ∈ {Write, Edit, MultiEdit, Bash} and the file isn't `*.example|sample|template` → `textOf(e)` joins command/content/new_string/edits → `scan` per line (skip lines with `secret-guard:allow`) → `matchLine`: provider regexes first, then a generic `key = "value"` rule gated by Shannon entropy ≥ 3.5 and a placeholder filter → `{ deny }` with kind, line, redacted prefix. All regexes are linear-time.
 
 ### Test harness
-`lib/mock-host.mjs` registers handlers, filters by event fields, chains `next`, and records `$.ui.toast`. Extend `$` when a mod needs more.
+The official kit: `$` fires events through the mod's hooks, `on(name, stub)` answers Claude Code, `$.ui.mount` draws a render site. `docs/API-NOTES.md` summarises it.
 
 ### CI
-`npm test`, then `scripts/validate.sh`: `claude plugin validate` per mod, and a check that the README contains the reported `hooks:` and `calls:` lines.
+`npm test` (`claude plugin test` per mod), then `scripts/validate.sh`: `claude plugin validate` per mod, and a check that the README contains the reported `hooks:` and `calls:` lines.
 
 ## REST API routes
 None.

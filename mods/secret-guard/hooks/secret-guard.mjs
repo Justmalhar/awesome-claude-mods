@@ -1,4 +1,4 @@
-// Secret Sentinel: refuses a tool call that would write a secret into a file or a command.
+// Secret Guard: refuses a tool call that would write a secret into a file or a command.
 //
 // tool.call (Write, Edit, MultiEdit, Bash): scan the text Claude is about to
 // write or run. On a match, deny with a reason Claude can act on. No UI, no
@@ -8,7 +8,7 @@
 // spelled literally.
 
 const MAX_SCAN = 1_000_000; // ponytail: only the first 1 MB is scanned, raise it if a real file needs more
-const ALLOW_MARK = "secret-sentinel:allow";
+const ALLOW_MARK = "secret-guard:allow";
 const TEMPLATE_FILE = /\.(example|sample|template)$/;
 const TOOLS = new Set(["Write", "Edit", "MultiEdit", "Bash"]);
 
@@ -40,19 +40,22 @@ export function register(on) {
       return next(e);
     }
     try {
-      $.ui.toast(`Secret Sentinel blocked ${e.tool}: ${hits[0].label}`);
+      $.ui.toast(`Secret Guard blocked ${e.tool}: ${hits[0].label}`);
     } catch {
       // a toast is a courtesy; the denial below is what matters
     }
     const found = hits.map((h) => `${h.label} (${h.redacted}, line ${h.line})`).join("; ");
     return {
       deny:
-        `Secret Sentinel blocked this ${e.tool} call: it contains ${found}. ` +
+        `Secret Guard blocked this ${e.tool} call: it contains ${found}. ` +
         `Do not put secrets in files or commands. Read the value from an environment variable ` +
         `(a git-ignored .env file) instead, and ask the user to supply it. ` +
         `If the user confirms it is a false positive, add "${ALLOW_MARK}" on that line.`,
     };
-  });
+  }).catch(async () => ({
+    // fail closed: a skipped guard would let the call (and the secret) through
+    deny: "Secret Guard failed while checking this call, so it was not run. Do not retry it unless the user asks you to.",
+  }));
 }
 
 /** The new text a tool call would write or run. */

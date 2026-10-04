@@ -10,7 +10,7 @@ Claude Code mods are new. Anthropic's playground has three samples; there is no 
 ## Goals
 1. Every mod is installable with one `claude plugin install` command from this repo's marketplace.
 2. Every mod's README states exactly the hooks and calls it uses, verified by CI.
-3. Every mod has tests that run with `node --test`, with no Claude Code session.
+3. Every mod has tests that run with `claude plugin test`, with no session, sign-in or network.
 4. Mods are small, dependency-free, and readable as a tutorial.
 
 ## Non-goals
@@ -32,7 +32,7 @@ Claude Code mods are new. Anthropic's playground has three samples; there is no 
 ## Roadmap
 | Order | Mod | Why |
 |---|---|---|
-| 1 | `secret-sentinel` (shipped) | Clear value, sets the guard pattern |
+| 1 | `secret-guard` (shipped) | Clear value, sets the guard pattern |
 | 2 | `path-fence` | Per-project allow/deny globs on file tools |
 | 3 | `branch-guard` | Refuse writes on main, nudge to a worktree |
 | 4 | `auto-checkpoint` | WIP commit per turn plus `/undo-turn` |
@@ -41,7 +41,7 @@ Claude Code mods are new. Anthropic's playground has three samples; there is no 
 | 7 | `model-router` | Cheap model for trivial turns (verify the API first) |
 | 8 | `test-on-stop` | Run tests at turn end, feed failures back |
 
-Open question: whether hook modules may import siblings, which decides if guards can share a `classify` helper. Verify against the reference docs.
+Resolved: a hooks module is one file (`modules` takes one path) and bands compose via `await next(e)`, so each bar mod can stay separate.
 
 ## Success metrics
 Mods merged with passing CI; stars and installs; zero reports of a mod leaking what it guards.
