@@ -1,0 +1,4 @@
+{
+  "description": "Spinner Stats: appends elapsed time, running tool and call count to the spinner suffix.",
+  "modules": ["./spinner-stats.mjs"]
+}

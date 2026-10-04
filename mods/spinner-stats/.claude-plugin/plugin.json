@@ -1,0 +1,7 @@
+{
+  "name": "spinner-stats",
+  "version": "0.1.0",
+  "description": "Adds elapsed time, the running tool and the tool-call count to Claude Code's own spinner.",
+  "author": { "name": "Malhar Ujawane" },
+  "keywords": ["mods", "ui", "spinner"]
+}
