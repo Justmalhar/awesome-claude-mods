@@ -1,0 +1,4 @@
+{
+  "description": "Notify on Finish: a turn.complete hook that raises a desktop notification after long turns.",
+  "modules": ["./notify-on-finish.mjs"]
+}

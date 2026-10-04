@@ -1,0 +1,21 @@
+{
+  "name": "notify-on-finish",
+  "version": "0.1.0",
+  "description": "Sends a desktop notification when a long turn finishes, so you can look away while Claude works.",
+  "author": { "name": "Malhar Ujawane" },
+  "keywords": ["mods", "notifications"],
+  "userConfig": {
+    "threshold_seconds": {
+      "type": "string",
+      "title": "Threshold (seconds)",
+      "description": "Only notify when the turn took longer than this.",
+      "default": "20"
+    },
+    "sound": {
+      "type": "string",
+      "title": "macOS sound name",
+      "description": "For example Glass or Ping. Leave empty for a silent notification.",
+      "default": ""
+    }
+  }
+}
