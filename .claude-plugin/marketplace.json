@@ -1,12 +1,66 @@
 {
   "name": "awesome-claude-mods",
-  "owner": { "name": "Malhar Ujawane" },
-  "metadata": { "description": "A curated collection of Claude Code mods. Shared as-is." },
+  "owner": {
+    "name": "Malhar Ujawane"
+  },
+  "metadata": {
+    "description": "A curated collection of Claude Code mods. Shared as-is."
+  },
   "plugins": [
+    {
+      "name": "auto-checkpoint",
+      "source": "./mods/auto-checkpoint",
+      "description": "Snapshots the working tree into hidden git refs at the start of every turn, with /checkpoints to list them and /undo-turn to roll back."
+    },
+    {
+      "name": "branch-guard",
+      "source": "./mods/branch-guard",
+      "description": "Stops Claude from editing files or running mutating git commands on main or master, and points it at a worktree instead."
+    },
+    {
+      "name": "cost-bar",
+      "source": "./mods/cost-bar",
+      "description": "A one-row band above the prompt with session cost, 5h/7d plan limits and an optional budget bar."
+    },
+    {
+      "name": "file-tree-pane",
+      "source": "./mods/file-tree-pane",
+      "description": "Adds /tree: a side pane with a lazy file tree coloured by git status. Press a file to put @path in the prompt."
+    },
+    {
+      "name": "notify-on-finish",
+      "source": "./mods/notify-on-finish",
+      "description": "Sends a desktop notification when a long turn finishes, so you can look away while Claude works."
+    },
+    {
+      "name": "path-guard",
+      "source": "./mods/path-guard",
+      "description": "Blocks Write, Edit and MultiEdit calls that target a path outside the project root or inside .git, plus optional deny globs."
+    },
+    {
+      "name": "powerline-bar",
+      "source": "./mods/powerline-bar",
+      "description": "A one-row powerline-style band above the prompt: directory, git branch and state, model, context fill."
+    },
     {
       "name": "secret-guard",
       "source": "./mods/secret-guard",
       "description": "Blocks Write, Edit and Bash calls that would put an API key, token or private key into a file or command."
+    },
+    {
+      "name": "sensitive-file-guard",
+      "source": "./mods/sensitive-file-guard",
+      "description": "Blocks Read, Write, Edit, Grep, Glob and Bash calls that touch .env files, private keys and credential stores."
+    },
+    {
+      "name": "spinner-stats",
+      "source": "./mods/spinner-stats",
+      "description": "Adds elapsed time, the running tool and the tool-call count to Claude Code's own spinner."
+    },
+    {
+      "name": "test-guard",
+      "source": "./mods/test-guard",
+      "description": "Blocks edits that make tests pass by weakening them: new skip/only markers, fewer assertions, a gutted test file, or deleting a test file."
     }
   ]
 }
