@@ -1,0 +1,7 @@
+{
+  "name": "secret-sentinel",
+  "version": "0.1.0",
+  "description": "Blocks Write, Edit and Bash calls that would put an API key, token or private key into a file or command.",
+  "author": { "name": "Malhar Ujawane" },
+  "keywords": ["mods", "safety", "secrets"]
+}

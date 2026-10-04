@@ -1,0 +1,12 @@
+{
+  "name": "awesome-claude-mods",
+  "owner": { "name": "Malhar Ujawane" },
+  "metadata": { "description": "A curated collection of Claude Code mods. Shared as-is." },
+  "plugins": [
+    {
+      "name": "secret-sentinel",
+      "source": "./mods/secret-sentinel",
+      "description": "Blocks Write, Edit and Bash calls that would put an API key, token or private key into a file or command."
+    }
+  ]
+}
