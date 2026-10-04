@@ -1,0 +1,15 @@
+{
+  "name": "branch-guard",
+  "version": "0.1.0",
+  "description": "Stops Claude from editing files or running mutating git commands on main or master, and points it at a worktree instead.",
+  "author": { "name": "Malhar Ujawane" },
+  "keywords": ["mods", "safety", "git"],
+  "userConfig": {
+    "protected_branches": {
+      "type": "string",
+      "title": "Protected branches",
+      "description": "Comma-separated branch names Claude may not edit on without asking",
+      "default": "main,master"
+    }
+  }
+}

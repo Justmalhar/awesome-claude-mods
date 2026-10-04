@@ -1,0 +1,4 @@
+{
+  "description": "Branch Guard: a tool.call hook that refuses Write, Edit, MultiEdit and mutating git commands on a protected branch.",
+  "modules": ["./branch-guard.mjs"]
+}
