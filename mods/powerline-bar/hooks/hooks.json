@@ -1,0 +1,4 @@
+{
+  "description": "Powerline Bar: a one-row band above the prompt with directory, git state, model and context fill.",
+  "modules": ["./powerline-bar.mjs"]
+}

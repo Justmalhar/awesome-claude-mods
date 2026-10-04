@@ -1,0 +1,15 @@
+{
+  "name": "powerline-bar",
+  "version": "0.1.0",
+  "description": "A one-row powerline-style band above the prompt: directory, git branch and state, model, context fill.",
+  "author": { "name": "Malhar Ujawane" },
+  "keywords": ["mods", "ui", "statusline", "git"],
+  "userConfig": {
+    "segments": {
+      "type": "string",
+      "title": "Segments",
+      "description": "Comma-separated, left to right, from: cwd, branch, git, model, context",
+      "default": "cwd,branch,git,model,context"
+    }
+  }
+}
