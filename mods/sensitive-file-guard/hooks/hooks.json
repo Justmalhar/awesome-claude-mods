@@ -1,0 +1,4 @@
+{
+  "description": "Sensitive File Guard: a tool.call hook that refuses calls touching .env files, keys and credential stores.",
+  "modules": ["./sensitive-file-guard.mjs"]
+}

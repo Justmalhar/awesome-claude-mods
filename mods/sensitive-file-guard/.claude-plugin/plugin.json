@@ -1,0 +1,7 @@
+{
+  "name": "sensitive-file-guard",
+  "version": "0.1.0",
+  "description": "Blocks Read, Write, Edit, Grep, Glob and Bash calls that touch .env files, private keys and credential stores.",
+  "author": { "name": "Malhar Ujawane" },
+  "keywords": ["mods", "safety", "secrets"]
+}
