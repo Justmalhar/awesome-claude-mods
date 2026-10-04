@@ -1,0 +1,4 @@
+{
+  "description": "Cost Bar: an AbovePrompt band showing session cost, plan limits and an optional budget bar.",
+  "modules": ["./cost-bar.mjs"]
+}

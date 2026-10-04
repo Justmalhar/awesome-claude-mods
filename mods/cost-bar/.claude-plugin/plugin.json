@@ -1,0 +1,15 @@
+{
+  "name": "cost-bar",
+  "version": "0.1.0",
+  "description": "A one-row band above the prompt with session cost, 5h/7d plan limits and an optional budget bar.",
+  "author": { "name": "Malhar Ujawane" },
+  "keywords": ["mods", "ui", "cost"],
+  "userConfig": {
+    "budget_usd": {
+      "type": "string",
+      "title": "Session budget (USD)",
+      "description": "Draws a bar that turns yellow at 70% and red at 90%. Leave empty for no budget.",
+      "default": ""
+    }
+  }
+}
