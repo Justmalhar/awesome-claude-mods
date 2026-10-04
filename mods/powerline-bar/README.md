@@ -12,7 +12,11 @@ Each segment is a block with its own background. The git blocks are green when c
 `ui.render` for the `AbovePrompt` site, a cached refresh driven by `session.start`, `turn.complete` and `$.clock.every`, one `git status` run through `$.process.run`, and a band that composes with other mods' bands.
 
 ## Demo
-Not run in a live session: the drawing is covered by `$.ui.mount` tests only (no screenshot). Segments, colours and narrow-width behaviour come from those tests.
+Captured in a terminal on Claude Code 2.1.289: directory, git branch with a clean tick, model, and (once a turn has run) context fill.
+
+![powerline-bar above the prompt](../../demos/powerline-bar.png)
+
+Segment choice, colours and narrow-width behaviour are also covered by `$.ui.mount` tests.
 
 ## How it works
 `refresh()` reads the directory, model and context, and runs `git status --porcelain=v2 --branch` once. It caches the result and redraws only when it changed. It runs on `session.start`, after every `turn.complete`, and every 5 seconds. Drawing never spawns git.

@@ -57,6 +57,14 @@ Bands compose: each mod puts the previous one's drawing inside its own, so these
 - [`auto-checkpoint`](mods/auto-checkpoint/) - Snapshots your working tree into hidden git refs at the start of every turn, without touching your index, stash or branches. `/checkpoints` lists them and `/undo-turn` rolls back, after asking.
 - [`notify-on-finish`](mods/notify-on-finish/) - Desktop notification when a long turn ends, so you can look away. macOS, with a Linux fallback.
 
+### Demos
+
+`powerline-bar` on its own, then stacked with `cost-bar` (the second row):
+
+![powerline-bar](demos/powerline-bar.png)
+
+![powerline-bar and cost-bar stacked](demos/cost-bar.png)
+
 ## Quick start
 
 ```bash

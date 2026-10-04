@@ -10,7 +10,11 @@ $1.23  ███░░░░░░░ 31%  5h 42% · 7d 18%
 `turn.complete` and `session.measure` refreshing module state from `$.session.usage()`, and a composing `ui.render` hook for the `AbovePrompt` band that only formats that state.
 
 ## Demo
-Not captured in a live session. Drawing is covered by `$.ui.mount` tests; `claude -p` cannot show UI.
+Captured in a terminal on Claude Code 2.1.289, stacked under [`powerline-bar`](../powerline-bar/): session cost on the left, then the 5-hour and 7-day plan limits. The budget bar isn't shown because `budget_usd` was left empty.
+
+![cost-bar below powerline-bar](../../demos/cost-bar.png)
+
+The budget bar and its colours are covered by tests only.
 
 ## How it works
 - On `turn.complete` and `session.measure`, `await $.session.usage()` into a module variable, then `$.ui.invalidate("ui.render")`. `ui.render` never calls `usage`.
