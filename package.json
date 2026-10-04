@@ -1,0 +1,9 @@
+{
+  "name": "awesome-claude-mods",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test \"mods/*/test/*.test.mjs\"",
+    "validate": "scripts/validate.sh"
+  }
+}
