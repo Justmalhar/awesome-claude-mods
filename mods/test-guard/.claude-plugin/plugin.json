@@ -1,0 +1,7 @@
+{
+  "name": "test-guard",
+  "version": "0.1.0",
+  "description": "Blocks edits that make tests pass by weakening them: new skip/only markers, fewer assertions, a gutted test file, or deleting a test file.",
+  "author": { "name": "Malhar Ujawane" },
+  "keywords": ["mods", "safety", "testing"]
+}

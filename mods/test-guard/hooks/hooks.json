@@ -1,0 +1,4 @@
+{
+  "description": "Test Guard: a tool.call hook that refuses Write, Edit, MultiEdit and Bash calls that weaken or delete tests.",
+  "modules": ["./test-guard.mjs"]
+}
