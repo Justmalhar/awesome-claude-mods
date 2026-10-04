@@ -1,0 +1,4 @@
+{
+  "description": "Auto Checkpoint: per-turn working-tree snapshots in refs/claude-checkpoints, with /checkpoints and /undo-turn.",
+  "modules": ["./auto-checkpoint.mjs"]
+}

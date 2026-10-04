@@ -1,0 +1,15 @@
+{
+  "name": "auto-checkpoint",
+  "version": "0.1.0",
+  "description": "Snapshots the working tree into hidden git refs at the start of every turn, with /checkpoints to list them and /undo-turn to roll back.",
+  "author": { "name": "Malhar Ujawane" },
+  "keywords": ["mods", "safety", "git", "undo"],
+  "userConfig": {
+    "keep": {
+      "type": "number",
+      "title": "Checkpoints to keep",
+      "description": "Newest N refs under refs/claude-checkpoints are kept; older ones are deleted.",
+      "default": 20
+    }
+  }
+}
